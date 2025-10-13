@@ -1,0 +1,5 @@
+.age/
+.terraform.lock.hcl
+.terraform/
+terraform.tfstate
+.decrypted*
