@@ -15,7 +15,7 @@ This repository sets up the initial MinIO infrastructure that will store your Te
 
 > [!warning] State Management
 > This repository stores its own state **locally** in `terraform.tfstate` (not in MinIO). This is intentional - it's a bootstrap repository that creates the MinIO backend itself.
-> 
+>
 > **The state file contains sensitive data** (MinIO credentials in plaintext). You can encrypt it with SOPS and commit it to version control, then decrypt when using Tofu locally. **Never commit it as plaintext.** If you lose the state, you can reimport: `tofu import minio_s3_bucket.tofu_state_bucket tofu-state`
 
 ## Requirements
@@ -25,7 +25,7 @@ Install the following tools:
 ```bash
 # On Debian/Ubuntu
 sudo apt update
-sudo apt install -y age sops 
+sudo apt install -y age sops
 
 # You'll also need OpenTofu (or Terraform) and Direnv
 # Install from: https://opentofu.org/docs/intro/install/ and https://direnv.net/
@@ -123,12 +123,12 @@ terraform {
     bucket   = "tofu-state"
     key      = "path/to/my/project.tfstate"
     endpoint = "http://your-minio-server:9000"
-    
+
     skip_credentials_validation = true
     skip_metadata_api_check     = true
     skip_region_validation      = true
     use_path_style            = true
-    
+
     region = "us-east-1"  # Required but not used by MinIO
   }
 }
@@ -145,11 +145,11 @@ export AWS_SECRET_ACCESS_KEY="your-minio-password"
 ```
 .
 ├── main.tf              # MinIO bucket resource definition
-├── providers.tf         # Provider configuration 
+├── providers.tf         # Provider configuration
 ├── secrets.sops.yaml    # Encrypted MinIO credentials
 ├── .sops.yaml           # SOPS encryption configuration
 ├── .envrc               # Direnv config for SOPS_AGE_KEY_FILE
-├── .age/                # Directory for age private keys 
+├── .age/                # Directory for age private keys
 └── README.md            # This file
 ```
 
